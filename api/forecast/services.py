@@ -24,7 +24,10 @@ class ForecastService:
             .filter(Forecast.date <= final_date) \
             .group_by(City.id) \
             .first()
+        if not data:
+            return None
         return City.query.get(data.city)
+        
     
     def get_mean_precipitation_by_city(self, initial_date, final_date):
         return db.session.query(City).with_entities(
