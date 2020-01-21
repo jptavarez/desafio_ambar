@@ -1,0 +1,8 @@
+pytest
+flask
+flask-restful
+flask-restplus
+flask-sqlalchemy
+flask-marshmallow
+marshmallow-sqlalchemy
+requests

@@ -1,0 +1,8 @@
+__pycache__/*
+api/__pycache__/*
+api/resources/__pycache__/*
+tests/__pycache__/*
+tests/db_test.sqlite
+.pytest_cache/*
+db.sqlite
+
