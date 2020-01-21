@@ -66,6 +66,15 @@ def test_analise(client):
         assert 'city_id' in precipitation, 'mean_precipitations.city_id não encontrado no json retornado'
         assert 'state' in precipitation, 'mean_precipitations.state não encontrado no json retornado'
         assert 'mean' in precipitation, 'mean_precipitations.mean não encontrado no json retornado'
+
+def test_analise_data_invalida(client):
+    response = client.get('/analise/2020-01-122334/2020-01-28')
+    assert response.status_code == 400, 'Código http invalido'
+    data = response.get_json()
+    assert 'message' in data, 'message não encontrado no json retornado'
+    assert data['message'] == 'Data Inválida.', 'Mensagem de erro invalida'
+
+
     
 
     
