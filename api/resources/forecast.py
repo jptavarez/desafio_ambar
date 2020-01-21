@@ -1,3 +1,4 @@
+from flask import abort
 from flask_restplus import Resource
 from api.extensions import db, api
 from api.models import Forecast, City 
@@ -8,9 +9,19 @@ from api.utils import str_to_date
 @api.route('/cidade/<int:city_code>')
 class CityForecast(Resource):
     def get(self, city_code):
-        forecast_service = get_instance()
-        forecasts = forecast_service.get_city_forecast(city_code)
-        return forecasts_schema.dump(forecasts)  
+        try:
+            forecast_service = get_instance()
+            forecasts = forecast_service.get_city_forecast(city_code)            
+        except ValueError as e:
+            return {
+                'message': str(e)
+            }, 400
+        except RuntimeError as e:
+            # a api de forecast não processou a requisição corretamente.
+            return {
+                'message': 'Serviço indisponível no momento. Por favor, tente novamente mais tarde.'
+            }, 503    
+        return forecasts_schema.dump(forecasts)      
 
 @api.route('/analise/<string:initial_date>/<string:final_date>')
 class ForecastAnalysis(Resource):

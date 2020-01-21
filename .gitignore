@@ -1,6 +1,7 @@
 __pycache__/*
 api/__pycache__/*
 api/resources/__pycache__/*
+api/forecast/__pycache__/*
 tests/__pycache__/*
 tests/db_test.sqlite
 .pytest_cache/*
