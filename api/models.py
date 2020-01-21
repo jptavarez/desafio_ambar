@@ -91,6 +91,4 @@ class Forecast(db.Model):
         forecast.max_temperature = max_temperature
         db.session.add(forecast)
         db.session.flush()
-        return forecast
-
-    
+        return forecast    
